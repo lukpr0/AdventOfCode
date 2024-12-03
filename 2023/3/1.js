@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-let content = fs.readFileSync('input.txt', 'utf-8').split('\r\n').map(x=>x.split(''));
+let content = fs.readFileSync('message.txt', 'utf-8').split('\r\n').map(x=>x.split(''));
 
 /*let content = 
 `467..114..
@@ -22,7 +22,8 @@ function isSymbol(char) {
     return char.match(/[^\d\.]/)
 }
 let sum = 0;
-
+let count = 0;
+let count1 = 0;
 for (let line = 0; line < content.length; line++) {
     let number = 0;
     let symbolAdjacent = false;
@@ -45,6 +46,8 @@ for (let line = 0; line < content.length; line++) {
         } else {
             if (symbolAdjacent) {
                 sum += number;
+                count++;
+                count1 += Math.floor(Math.log10(number))+1;
             }
             number = 0;
             symbolAdjacent = false;
@@ -52,8 +55,11 @@ for (let line = 0; line < content.length; line++) {
     }
     if (symbolAdjacent) {
         sum += number;
+        count++;
+        count1 += Math.floor(Math.log10(number))+1;
     } 
 }
-
+console.log(count)
+console.log(count1)
 console.log(sum)
 //71430818
